@@ -1,26 +1,129 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ─── Neutral — backgrounds (dark) → text (light) ─── */
+  --color-neutral-50:  #F2EEE3;   /* lightest — primary text       (was: fg) */
+  --color-neutral-100: #E5E0D2;
+  --color-neutral-200: #B5AF9E;   /* secondary text                (was: fg-soft) */
+  --color-neutral-300: #8A8473;
+  --color-neutral-400: #6F6A5B;   /* tertiary text                 (was: fg-dim) */
+  --color-neutral-500: #4B4738;   /* disabled / hint text          (was: fg-ghost) */
+  --color-neutral-600: #525972;   /* bright borders                (was: line-bright) */
+  --color-neutral-700: #3A4156;   /* default borders               (was: line) */
+  --color-neutral-800: #252B3D;   /* subtle borders                (was: edge) */
+  --color-neutral-850: #1A1F2D;   /* elevated surface — popover    (was: rail) */
+  --color-neutral-900: #131722;   /* card surface                  (was: stage) */
+  --color-neutral-950: #0C0E14;   /* deep background               (was: pitch) */
+  --color-neutral-1000: #08090C;  /* darkest — page background     (was: ink) */
+
+  /* ─── Mint — primary brand (was: you) ─── */
+  --color-mint-50:  #E6FBF7;
+  --color-mint-100: #C2F5EA;
+  --color-mint-200: #94EDDB;
+  --color-mint-300: #5BE9D8;   /* base                            (was: you) */
+  --color-mint-400: #3FCFC0;
+  --color-mint-500: #2BB3A4;   /* deep                            (was: you-deep) */
+  --color-mint-600: #1F8B80;
+  --color-mint-700: #186B63;
+  --color-mint-800: #114F49;
+  --color-mint-900: #0B3530;
+  --color-mint-950: #061D1B;
+
+  /* ─── Crimson — opposing / dangerous (was: opp) ─── */
+  --color-crimson-50:  #FFE8E2;
+  --color-crimson-100: #FFC9B8;
+  --color-crimson-200: #FF9A7E;
+  --color-crimson-300: #FF7559;
+  --color-crimson-400: #FF5C3D;   /* base                         (was: opp) */
+  --color-crimson-500: #E2451F;
+  --color-crimson-600: #C73617;   /* deep                         (was: opp-deep) */
+  --color-crimson-700: #9F2A11;
+  --color-crimson-800: #75200D;
+  --color-crimson-900: #4D1408;
+  --color-crimson-950: #2A0A04;
+
+  /* ─── Gold — accent / honor / warning (was: honor, warn) ─── */
+  --color-gold-50:  #FEF6E1;
+  --color-gold-100: #FCE8B5;
+  --color-gold-200: #F9D880;
+  --color-gold-300: #F4C04F;   /* base                            (was: honor) */
+  --color-gold-400: #DAA63A;
+  --color-gold-500: #B5872A;
+  --color-gold-600: #8F6920;
+  --color-gold-700: #6A4D16;
+  --color-gold-800: #46330E;
+  --color-gold-900: #251A07;
+  --color-gold-950: #130D03;
+
+  /* ─── Green — success (was: good) ─── */
+  --color-green-50:  #EEFBE6;
+  --color-green-100: #D2F4BF;
+  --color-green-200: #AFEB93;
+  --color-green-300: #8BE36B;   /* base                           (was: good) */
+  --color-green-400: #6BC34E;
+  --color-green-500: #4FA035;
+  --color-green-600: #3A7B27;
+  --color-green-700: #2A5A1C;
+  --color-green-800: #1B3D12;
+  --color-green-900: #0E2208;
+  --color-green-950: #051104;
+
+  /* ─── Red — destructive / error (was: bad) ─── */
+  --color-red-50:  #FFE4E9;
+  --color-red-100: #FFBAC5;
+  --color-red-200: #FF8095;
+  --color-red-300: #FF5C75;
+  --color-red-400: #FF3D5A;   /* base                             (was: bad) */
+  --color-red-500: #E22340;
+  --color-red-600: #B5172E;
+  --color-red-700: #871020;
+  --color-red-800: #5C0A15;
+  --color-red-900: #34050B;
+  --color-red-950: #1A0205;
+
+  /* ─── Fonts ─── */
+  --font-sans:    var(--font-geist), system-ui, sans-serif;
+  --font-display: var(--font-instrument), serif;
+  --font-mono:    var(--font-jetbrains), ui-monospace, monospace;
+
+  /* ─── Border radius ─── */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* ─── Shadows ─── */
+  --shadow-glow-mint:    0 0 26px rgba(91, 233, 216, 0.35);
+  --shadow-glow-crimson: 0 0 26px rgba(255, 92, 61, 0.35);
+  --shadow-glow-gold:    0 0 22px rgba(244, 192, 79, 0.32);
+
+  /* ─── Letter spacing ─── */
+  --tracking-kicker:  0.18em;
+  --tracking-display: -0.02em;
+
+  /* ─── Animations ─── */
+  --animate-pulse-soft: pulse-soft 1.4s ease-in-out infinite;
+  --animate-fade-up:    fade-up 600ms ease both;
+  --animate-spin-fast:  spin-fast 0.9s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Keyframes live outside @theme */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes spin-fast {
+  to { transform: rotate(360deg); }
+}
+
+/* Selection styling */
+::selection {
+  background: color-mix(in srgb, var(--color-mint-300) 15%, transparent);
+  color: var(--color-mint-300);
 }
